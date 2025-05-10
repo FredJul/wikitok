@@ -1,0 +1,11 @@
+{
+    "@@locale": "fr",
+    "appTitle": "WikiTok",
+    "feedRetryButton": "Réssayer",
+    "serverError": "Impossible de récupérer les articles. Veuillez réessayer.",
+    "networkError": "Pas de connexion internet ou serveur inaccessible",
+    "cacheError": "Impossible de retrouver les parmètres",
+    "unexpectedError": "Une erreur inattendue s'est produite.",
+    "articleReadMoreButton": "Lire plus",
+    "articleShareContent": "Voici un article intéressant trouvé grâce à WikiTok : \"{title}\".\n\n\"{excerpt}\"\n\nPour en savoir plus, visitez {url}"
+}

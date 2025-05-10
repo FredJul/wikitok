@@ -1,0 +1,49 @@
+{
+    "@@locale": "en",
+    "appTitle": "WikiTok",
+    "@appTitle": {
+        "description": "Title of the app"
+    },
+    "feedRetryButton": "Retry",
+    "@feedRetryButton": {
+        "description": "Text for the retry button"
+    },
+    "serverError": "Could not fetch articles. Please try again",
+    "@serverError": {
+        "description": "Message displayed for a server error"
+    },
+    "networkError": "No internet or server unreachable",
+    "@networkError": {
+        "description": "Message displayed for a network error"
+    },
+    "cacheError": "Could not retrieve settings",
+    "@cacheError": {"description": "Message displayed for a cache error"},
+    "unexpectedError": "An unexpected error occurred",
+    "@unexpectedError": {
+        "description": "Message displayed for an unexpected error"
+    },
+    "articleReadMoreButton": "Read more",
+    "@articleReadMoreButton": {
+        "description": "Text for the article read more button"
+    },
+    "articleShareContent": "Here's an interesting article found via WikiTok: \"{title}\".\n\n\"{excerpt}\"\n\nLearn more by visiting {url}",
+    "@articleShareContent": {
+        "placeholders": {
+            "title": {
+                "type": "String",
+                "description": "The title of the article."
+              },
+              "excerpt": {
+                "type": "String",
+                "description": "A brief excerpt or summary of the article."
+              },
+              "url": {
+                "type": "String",
+                "description": "The URL where the full article can be read."
+              }
+        }
+    }
+   
+
+
+}
