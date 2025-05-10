@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wikitok/src/domain/providers/usecase_providers.dart';
 
-part 'locale_view_model.g.dart';
-
-@riverpod
-class LocaleViewModel extends _$LocaleViewModel {
+class LocaleViewModel extends AutoDisposeNotifier<Locale?> {
   @override
   Locale? build() {
     _initLocale();
@@ -25,3 +22,6 @@ class LocaleViewModel extends _$LocaleViewModel {
         .call(languageCode: languageCode);
   }
 }
+
+final localeViewModelProvider =
+    NotifierProvider.autoDispose<LocaleViewModel, Locale?>(LocaleViewModel.new);

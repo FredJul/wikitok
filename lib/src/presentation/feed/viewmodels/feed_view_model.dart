@@ -1,17 +1,14 @@
 import 'dart:async';
 
 import 'package:async/async.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wikitok/src/domain/common/result_extension.dart';
 import 'package:wikitok/src/domain/entities/article.dart';
 import 'package:wikitok/src/domain/providers/usecase_providers.dart';
 import 'package:wikitok/src/presentation/common/failures/failures.dart';
 import 'package:wikitok/src/presentation/feed/viewmodels/feed_state.dart';
 
-part 'feed_view_model.g.dart';
-
-@riverpod
-class FeedViewModel extends _$FeedViewModel {
+class FeedViewModel extends AutoDisposeNotifier<FeedState> {
   CancelableOperation<Result<List<Article>>>? _fetchFeedOperation;
 
   @override
@@ -55,3 +52,6 @@ class FeedViewModel extends _$FeedViewModel {
     });
   }
 }
+
+final feedViewModelProvider =
+    NotifierProvider.autoDispose<FeedViewModel, FeedState>(FeedViewModel.new);
