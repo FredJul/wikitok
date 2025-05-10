@@ -34,7 +34,7 @@ class _FeedDataState extends ConsumerState<FeedData> {
   void _onScroll() {
     final currentPage = _pageController.page?.toInt() ?? 0;
     final totalPages = widget._feed.length;
-    final bool isNearEndPage = currentPage >= totalPages - 5;
+    final bool isNearEndPage = currentPage >= totalPages - 3;
 
     if (isNearEndPage) {
       final locale = ref.read(localeViewModelProvider);

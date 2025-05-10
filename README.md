@@ -17,7 +17,7 @@ Based on MVVM + Clean Architecture. Each layer is correctly isolated (no data de
 
 *Data layer*:
 - Data sources: basic data query and exception handling
-- Repositories: handle several datasources in needed and convert data models to domain entities and encapsulate them into a Result (to force error handling)
+- Repositories: handle several datasources (when needed), convert data models to domain entities and encapsulate them into a Result (to force error handling)
 
 *Presentation layer*:
 - View models: retrieve data from usecases and prepare them for the views

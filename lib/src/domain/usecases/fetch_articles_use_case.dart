@@ -16,7 +16,7 @@ class FetchArticlesUseCase {
   /// a [NetworkException], a [ServerException] or an [UnexpectedException].
   Future<Result<List<Article>>> call({
     required String languageCode,
-    int batchSize = 20,
+    int batchSize = 5,
   }) async {
     final List<Article> validArticles = [];
     final Set<String> addedArticleTitles = {};

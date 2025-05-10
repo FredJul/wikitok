@@ -39,7 +39,11 @@ class FeedViewModel extends AutoDisposeNotifier<FeedState> {
     await _fetchFeedOperation!.value.then((articlesResult) {
       articlesResult.when(
         value: (articles) {
-          state = state.copyWith(status: FeedStatus.success, feed: articles);
+          _fetchFeedOperation = null;
+          state = state.copyWith(
+            status: FeedStatus.success,
+            feed: state.feed + articles,
+          );
         },
         error: (e, t) {
           _fetchFeedOperation = null;
