@@ -64,9 +64,7 @@ void main() {
 
   test('should return article when API call is successful', () async {
     when(
-      () => mockDataSource.fetchRandomWikipediaArticle(
-        languageCode: testLanguage,
-      ),
+      () => mockDataSource.fetchRandomArticle(testLanguage),
     ).thenAnswer((_) async => validWikipediaArticle);
 
     final articleResult = await articleRepository.fetchSingleArticle(

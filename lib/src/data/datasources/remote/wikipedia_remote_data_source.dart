@@ -1,28 +1,16 @@
 import 'package:dio/dio.dart';
-import 'package:wikitok/src/data/datasources/remote/dio_error_interceptor.dart';
-import 'package:wikitok/src/data/datasources/remote/wikipedia_api_client.dart';
+import 'package:retrofit/retrofit.dart';
 import 'package:wikitok/src/data/models/wikipedia_article.dart';
-import 'package:wikitok/src/domain/common/exceptions.dart';
 
-class WikipediaRemoteDataSource {
-  final WikipediaApiClient _apiClient;
+part 'wikipedia_remote_data_source.g.dart';
 
-  WikipediaRemoteDataSource({WikipediaApiClient? apiClient})
-    : _apiClient = apiClient ?? _createDefaultApiClient();
+@RestApi(baseUrl: "")
+abstract class WikipediaRemoteDataSource {
+  factory WikipediaRemoteDataSource(Dio dio, {String baseUrl}) =
+      _WikipediaRemoteDataSource;
 
-  static WikipediaApiClient _createDefaultApiClient() {
-    final dio = Dio();
-    dio.interceptors.add(DioErrorInterceptor());
-    return WikipediaApiClient(dio);
-  }
-
-  /// Fetches a random Wikipedia article from the specified language.
-  /// Throws [NetworkException] if there is a network error.
-  /// Throws [ServerException] if the server returns an error.
-  /// Throws [UnexpectedException] for any other errors.
-  Future<WikipediaArticle> fetchRandomWikipediaArticle({
-    required String languageCode,
-  }) {
-    return _apiClient.getRandomArticle(languageCode);
-  }
+  @GET("https://{languageCode}.wikipedia.org/api/rest_v1/page/random/summary")
+  Future<WikipediaArticle> fetchRandomArticle(
+    @Path("languageCode") String languageCode,
+  );
 }

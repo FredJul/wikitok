@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'wikipedia_api_client.dart';
+part of 'wikipedia_remote_data_source.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'wikipedia_api_client.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _WikipediaApiClient implements WikipediaApiClient {
-  _WikipediaApiClient(this._dio, {this.baseUrl, this.errorLogger});
+class _WikipediaRemoteDataSource implements WikipediaRemoteDataSource {
+  _WikipediaRemoteDataSource(this._dio, {this.baseUrl, this.errorLogger});
 
   final Dio _dio;
 
@@ -18,7 +18,7 @@ class _WikipediaApiClient implements WikipediaApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<WikipediaArticle> getRandomArticle(String languageCode) async {
+  Future<WikipediaArticle> fetchRandomArticle(String languageCode) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

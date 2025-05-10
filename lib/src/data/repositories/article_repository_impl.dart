@@ -20,9 +20,7 @@ class ArticleRepositoryImpl implements ArticleRepository {
     // TODO: to add more intelligence to the repo, we could implement here a retry or cache mechanism
 
     return Result.capture<WikipediaArticle>(
-      _wikipediaRemoteDataSource.fetchRandomWikipediaArticle(
-        languageCode: languageCode,
-      ),
+      _wikipediaRemoteDataSource.fetchRandomArticle(languageCode),
     ).map<Article>((value) => _mapToArticle(value));
   }
 
