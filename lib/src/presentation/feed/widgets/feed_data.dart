@@ -54,8 +54,9 @@ class _FeedDataState extends ConsumerState<FeedData> {
       i < startPage + _prefetchCount && i < widget._feed.length;
       i++
     ) {
-      final String imageUrl = widget._feed[i].imageUrl;
+      if (!mounted) return;
 
+      final String imageUrl = widget._feed[i].imageUrl;
       await precacheImage(NetworkImage(imageUrl), context);
     }
   }

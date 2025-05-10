@@ -1,14 +1,20 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
+import 'package:wikitok/src/data/datasources/remote/dio_error_interceptor.dart';
+import 'package:wikitok/src/data/datasources/remote/wikipedia_api_client.dart';
 import 'package:wikitok/src/data/models/wikipedia_article.dart';
 import 'package:wikitok/src/domain/common/exceptions.dart';
 
 class WikipediaRemoteDataSource {
-  final http.Client _httpClient;
+  final WikipediaApiClient _apiClient;
 
-  WikipediaRemoteDataSource({required http.Client httpClient})
-    : _httpClient = httpClient;
+  WikipediaRemoteDataSource({WikipediaApiClient? apiClient})
+    : _apiClient = apiClient ?? _createDefaultApiClient();
+
+  static WikipediaApiClient _createDefaultApiClient() {
+    final dio = Dio();
+    dio.interceptors.add(DioErrorInterceptor());
+    return WikipediaApiClient(dio);
+  }
 
   /// Fetches a random Wikipedia article from the specified language.
   /// Throws [NetworkException] if there is a network error.
@@ -16,29 +22,7 @@ class WikipediaRemoteDataSource {
   /// Throws [UnexpectedException] for any other errors.
   Future<WikipediaArticle> fetchRandomWikipediaArticle({
     required String languageCode,
-  }) async {
-    final baseUrl = '$languageCode.wikipedia.org';
-    final randomWikipediaArticleRequest = Uri.https(
-      baseUrl,
-      'api/rest_v1/page/random/summary',
-    );
-
-    try {
-      final randomWikipediaArticleResponse = await _httpClient.get(
-        randomWikipediaArticleRequest,
-      );
-
-      if (randomWikipediaArticleResponse.statusCode != 200) {
-        throw ServerException(randomWikipediaArticleResponse.statusCode);
-      }
-
-      return WikipediaArticle.fromJson(
-        jsonDecode(randomWikipediaArticleResponse.body) as Map<String, dynamic>,
-      );
-    } on http.ClientException {
-      throw NetworkException();
-    } catch (_) {
-      throw UnexpectedException();
-    }
+  }) {
+    return _apiClient.getRandomArticle(languageCode);
   }
 }
